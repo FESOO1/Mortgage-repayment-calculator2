@@ -6,12 +6,25 @@ const inputSymbols = document.querySelectorAll('.mortgage-calculator-left-bottom
 const submitButton = document.getElementById('submitButton');
 const radioInputs = document.querySelectorAll('.mortgage-calculator-left-bottom-radio-input-itself');
 const clearButton = document.getElementById('clearButton');
+const repaymentTypeInput = document.getElementById('repaymentTypeInput');
+const interestOnlyTypeInput = document.getElementById('interestOnlyTypeInput');
 
 // OUTPUT
 const rightEmptyContainer = document.querySelector('.mortgage-calculator-right-empty');
 const rightOutputContainer = document.querySelector('.mortgage-calculator-right-output');
 const monthlyRepaymentText = document.querySelector('.mortgage-calculator-right-output-itself-inner-monthly-repayment');
 const totalRepayText = document.querySelector('.mortgage-calculator-right-output-itself-inner-total-repay');
+
+//
+const mortgageAmountInput = document.getElementById('mortgageAmountInput');
+const mortgageTermInput = document.getElementById('mortgageTermInput');
+const interestRateInput = document.getElementById('interestRateInput');
+let stepOne;
+let stepTwo;
+let stepThree;
+let stepFour;
+let stepFive;
+let finalResult;
 
 // CALCULATE THE REPAYMENT 
 
@@ -49,6 +62,19 @@ function calculateTheRepayment(e) {
         // DISPLAYING THE OUTPUT BY REMOVING THE ACTIVE CLASS FROM THE EMPTY CONTAINER WHILE ADDING ACTIVE CLASS TO THE OUTPUT CONTAINER
         rightEmptyContainer.classList.remove('mortgage-calculator-right-empty-active');
         rightOutputContainer.classList.add('mortgage-calculator-right-output-active');
+
+        // MORTGAGE REPAYMENT
+        if (repaymentTypeInput.checked) {
+            stepOne = interestRateInput.value / 12 / 100;
+            stepTwo = mortgageTermInput.value * 12;
+            stepThree = (1 + stepOne) * stepTwo;
+            stepFour = mortgageAmountInput.value * stepOne * stepThree;
+            stepFive = stepThree - 1;
+            finalResult = stepFive / stepFour;
+            monthlyRepaymentText.textContent = `$${finalResult.toFixed(2)}`;
+        } else {
+
+        };
     };
 };
 
