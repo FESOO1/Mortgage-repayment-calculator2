@@ -70,9 +70,9 @@ function calculateTheRepayment(e) {
             stepTwo = mortgageTermInput.value * 12;
             stepThree = 1 + stepOne;
             stepFour = stepThree * stepTwo;
-            console.log(`${stepTwo} monthly, ${stepFour}`);
+            console.log(stepFour);
         } else {
-
+            
         };
     };
 };
