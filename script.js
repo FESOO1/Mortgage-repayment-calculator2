@@ -26,6 +26,7 @@ let stepFour;
 let stepFive;
 let finalResult;
 
+
 // CALCULATE THE REPAYMENT 
 
 function calculateTheRepayment(e) {
@@ -67,11 +68,9 @@ function calculateTheRepayment(e) {
         if (repaymentTypeInput.checked) {
             stepOne = interestRateInput.value / 12 / 100;
             stepTwo = mortgageTermInput.value * 12;
-            stepThree = (1 + stepOne) * stepTwo;
-            stepFour = mortgageAmountInput.value * stepOne * stepThree;
-            stepFive = stepThree - 1;
-            finalResult = stepFive / stepFour;
-            monthlyRepaymentText.textContent = `$${finalResult.toFixed(2)}`;
+            stepThree = 1 + stepOne;
+            stepFour = stepThree * stepTwo;
+            console.log(`${stepTwo} monthly, ${stepFour}`);
         } else {
 
         };
