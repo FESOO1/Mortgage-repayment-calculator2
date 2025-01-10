@@ -1,13 +1,11 @@
 const inputContainers = document.querySelectorAll('.mortgage-calculator-left-bottom-input-container');
-const radioInputContainers = document.querySelectorAll('.mortgage-calculator-left-bottom-input-radio-container');
 const errorMessages = document.querySelectorAll('.mortgage-calculator-error-message');
 const errorMessageRadioInput = document.querySelector('.mortgage-calculator-error-message-radio');
 const inputs = document.querySelectorAll('.mortgage-calculator-left-bottom input:not(#repaymentTypeInput, #interestOnlyTypeInput)');
 const inputSymbols = document.querySelectorAll('.mortgage-calculator-left-bottom-input-text');
 const submitButton = document.getElementById('submitButton');
-const repaymentTypeInput = document.getElementById('repaymentTypeInput');
-const interestOnlyTypeInput = document.getElementById('interestOnlyTypeInput');
 const radioInputs = document.querySelectorAll('.mortgage-calculator-left-bottom-radio-input-itself');
+const clearButton = document.getElementById('clearButton');
 
 // OUTPUT
 const rightEmptyContainer = document.querySelector('.mortgage-calculator-right-empty');
@@ -48,9 +46,38 @@ function calculateTheRepayment(e) {
 
     // IF ALL THE REQUIREMENTS ARE MET, THEN DO THE FOLLOWING:
     if (errorMessagesArray.length === 0) {
-
+        // DISPLAYING THE OUTPUT BY REMOVING THE ACTIVE CLASS FROM THE EMPTY CONTAINER WHILE ADDING ACTIVE CLASS TO THE OUTPUT CONTAINER
+        rightEmptyContainer.classList.remove('mortgage-calculator-right-empty-active');
+        rightOutputContainer.classList.add('mortgage-calculator-right-output-active');
     };
 };
 
-// INITIALIZING THE BUTTON
+// CLEAR EVERYTHING
+
+function clearEverything() {
+    const allInputs = document.querySelectorAll('.mortgage-calculator-left-bottom input');
+
+    // RESETTING ALL THE INPUT
+    for (const input of allInputs) {
+        input.value = '';
+        input.checked = false;
+    };
+
+    // RESETTING THE INPUT CONTAINERS/SYMBOLS/ERROR PARAGRAPHS
+    for (let i = 0; i < 3; i++) {
+        inputContainers[i].style.border = '1px solid hsl(200, 24%, 40%)';
+        inputSymbols[i].classList.remove('mortgage-calculator-left-bottom-input-text-error');
+        errorMessages[i].style.display = 'none';
+    };
+
+    // RADIO ERROR PARAGRAPH
+    errorMessageRadioInput.style.display = 'none';
+
+    // HIDING THE OUTPUT BY ADDING ACTIVE CLASS TO THE EMPTY CONTAINER WHILE REMOVING THE ACTIVE CLASS FROM THE OUTPUT CONTAINER
+    rightEmptyContainer.classList.add('mortgage-calculator-right-empty-active');
+    rightOutputContainer.classList.remove('mortgage-calculator-right-output-active');
+};
+
+// INITIALIZING BUTTONS
 submitButton.addEventListener('click', calculateTheRepayment);
+clearButton.addEventListener('click', clearEverything);
